@@ -1,0 +1,21 @@
+applications:
+- name: eureka-server
+  instances: 1
+  memory: 512M
+  disk_quota: 512M
+  routes:
+  - route: eureka-server-responsible-jaguar-pm.cfapps.io
+  stack: cflinuxfs3
+  buildpacks:
+  - java_buildpack
+  path: target/eureka-server-0.0.1-SNAPSHOT.jar
+  env:
+      #CF_SVC_NAME_DIGITAL_REGISTRY
+      #CF_SVC_NAME_DIGITAL_REGISTRY: ((svc_name_registry))
+      #CF_SVC_NAME_GIT: ((svc_name_git))
+      # Provide Config Server authentication details here (for client use)
+      #security.user.name: ((security_user_name))
+      #security.user.password: ((security_user_passwd))
+      #spring.cloud.services.registrationMethod: direct
+      eureka.client.enabled: true
+      JAVA_OPTS: '-Xmx250m'
